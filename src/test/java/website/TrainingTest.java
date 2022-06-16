@@ -23,6 +23,12 @@ public class TrainingTest {
         driver.get("https://www.training360.com/");
         var wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         var modal = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("NewsletterModal"))));
+
+        wait.until(d -> {
+            log.debug("check opacity");
+            return modal.getCssValue("opacity").equals("1");
+        });
+
         log.debug("OK");
         modal.findElement(By.id("NewsletterModalCloseButton")).click();
         wait.until(ExpectedConditions.invisibilityOf(modal));
